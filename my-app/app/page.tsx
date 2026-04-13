@@ -60,15 +60,15 @@ export default function Home() {
 
             <div className="transform transition-all duration-500 translate-y-0 group-hover:-translate-y-1">
               <h1 className="text-3xl font-extrabold tracking-tight text-zinc-900 dark:text-white mt-1 drop-shadow-sm">
-                Alice Developer
+                주승제
               </h1>
               <div className="mt-3 inline-flex items-center px-4 py-1.5 rounded-full bg-zinc-900/5 dark:bg-white/10 border border-zinc-900/10 dark:border-white/10 shadow-inner">
                 <span className="text-sm font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-pink-500 dark:from-purple-400 dark:to-pink-300">
-                  @alicedev
+                  @seungjeajoo
                 </span>
               </div>
               <p className="text-[15px] font-medium text-zinc-600 dark:text-zinc-300 mt-5 max-w-[280px] mx-auto leading-relaxed">
-                Crafting exceptional digital experiences. <br/> Design enthusiast & frontend ninja. 🚀
+                실시간으로 AI때문에 큰일난 소프트웨어과 대학생입니다. <br /> 아하하 🚀
               </p>
             </div>
           </div>
@@ -98,7 +98,7 @@ export default function Home() {
                       {link.name}
                     </span>
                   </div>
-                  
+
                   {/* Arrow Icon */}
                   <div className="relative z-10 flex h-9 w-9 items-center justify-center rounded-full bg-zinc-100 dark:bg-zinc-700 text-zinc-400 opacity-0 transform translate-x-4 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0 group-hover:text-zinc-900 dark:group-hover:text-zinc-50 group-hover:bg-white dark:group-hover:bg-zinc-600 shadow-sm">
                     <ChevronRight size={18} strokeWidth={3} />
