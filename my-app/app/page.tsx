@@ -31,7 +31,7 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-[#FFF4E0] dark:bg-[#1E1E1E] text-black dark:text-white font-sans p-6 md:p-10 lg:p-16 transition-colors duration-300">
       <div className="max-w-7xl mx-auto h-full flex flex-col lg:flex-row gap-16 lg:gap-20 items-center lg:items-start pt-10 lg:pt-24 pb-20">
-        
+
         {/* Left Side: Intro */}
         <div className="w-full lg:w-5/12 flex flex-col items-center lg:items-start text-center lg:text-left space-y-8">
           <div className="inline-block border-4 border-black dark:border-white bg-white dark:bg-zinc-800 px-6 py-2 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] dark:shadow-[8px_8px_0px_0px_rgba(255,255,255,1)] transform -rotate-2">
@@ -39,11 +39,11 @@ export default function Home() {
               Software Engineer
             </span>
           </div>
-          
+
           <h1 className="text-7xl sm:text-8xl lg:text-[7rem] font-black text-black dark:text-[#FFF4E0] tracking-tighter uppercase drop-shadow-[6px_6px_0_rgba(255,100,100,1)] dark:drop-shadow-[6px_6px_0_rgba(200,50,50,1)]">
             주승제
           </h1>
-          
+
           <div className="bg-cyan-200 dark:bg-cyan-800 border-4 border-black dark:border-white p-6 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] dark:shadow-[8px_8px_0px_0px_rgba(255,255,255,1)] max-w-md transform rotate-1 mt-6">
             <p className="text-2xl lg:text-3xl font-bold text-black dark:text-white leading-tight">
               실시간으로 AI때문에 큰일난 소프트웨어과 대학생입니다.
@@ -52,7 +52,7 @@ export default function Home() {
               <span className="text-xl font-black text-black">아하하 🚀</span>
             </div>
           </div>
-          
+
           <div className="text-xl lg:text-2xl font-bold border-b-4 border-black dark:border-white pb-2 px-2 mt-8 inline-block">
             @seungjeajoo
           </div>
@@ -78,7 +78,7 @@ export default function Home() {
                     {link.name}
                   </span>
                 </div>
-                
+
                 <div className="bg-white border-4 border-black rounded-full p-2 group-hover:rotate-45 transition-transform duration-300 flex-shrink-0">
                   <ArrowRight size={28} strokeWidth={4} className="text-black" />
                 </div>
@@ -86,9 +86,9 @@ export default function Home() {
             );
           })}
         </div>
-        
+
       </div>
-      
+
       {/* Footer */}
       <div className="mt-12 pb-6 text-center">
         <p className="text-lg font-black tracking-[0.4em] uppercase text-black dark:text-white border-t-4 border-black dark:border-white max-w-sm mx-auto pt-6 inline-block">
