@@ -1,8 +1,9 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #FFF4E0;
+  /* Neobrutalism 배경색 (아이보리/버터스카치) */
+  --foreground: #000000;
 }
 
 @theme inline {
@@ -10,22 +11,13 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-  
-  --animate-blob: blob 10s infinite;
-  --animate-spin-slow: spin 8s linear infinite;
-
-  @keyframes blob {
-    0% { transform: translate(0px, 0px) scale(1); }
-    33% { transform: translate(30px, -50px) scale(1.2); }
-    66% { transform: translate(-20px, 20px) scale(0.8); }
-    100% { transform: translate(0px, 0px) scale(1); }
-  }
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    /* Neobrutalism은 종종 다크모드에서도 강렬한 색을 유지하거나 완전 반전시킵니다 */
+    --background: #1C1C1C;
+    --foreground: #F4F4F4;
   }
 }
 
@@ -33,11 +25,4 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
-}
-
-.animation-delay-2000 {
-  animation-delay: 2s;
-}
-.animation-delay-4000 {
-  animation-delay: 4s;
 }
