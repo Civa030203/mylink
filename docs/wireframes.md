@@ -1,105 +1,212 @@
 # 마이링크 (MyLink) - 화면별 와이어프레임 설계 (Wireframes)
 
+이 문서는 마이링크 서비스의 주요 화면 구조를 시각화하여 정의합니다. `Mermaid` 다이어그램과 `ASCII Art`를 사용하여 레이아웃을 표현하며, 상세 명세는 `shadcn/ui` 컴포넌트 기준을 따릅니다.
+
+---
+
+## 1. 전체 서비스 흐름도 (Screen Flow)
+
+```mermaid
+graph TD
+    A["랜딩 페이지 /"] -->|구글 로그인| B{"신규 유저?"}
+    B -->|Yes| C["온보딩 페이지 /onboarding"]
+    B -->|No| D["대시보드 /admin/links"]
+    C -->|설정 완료| D
+    D --> E["프로필 설정 /admin/profile"]
+    D --> F["프리뷰 확인"]
+    G["퍼블릭 페이지 /:displayname"] -->|방문자| H["인터랙션/이동"]
+```
+
+---
+
+## 2. 랜딩 페이지 (Landing Page)
+
+*   **상단 네비게이션바 (Global Header)**
+    *   좌측: MyLink 로고
+    *   우측: 화면 우측 상단에 고정
+        *   비로그인 시: `[로그인]` / `[무료로 시작하기]` 버튼
+        *   로그인 시: `[마이페이지]` 버튼 (클릭 시 마이페이지/대시보드 진입)
+
 ### Mermaid Layout
 ```mermaid
 graph TD
-    subgraph "Landing Page Layout"
-    H[Header: Logo | Login / MyPage]
-    Hero[Hero Section]
+    subgraph LandingPage ["Landing Page Layout"]
+    H["Header: Logo | Login / MyPage"]
+    Hero["Hero Section"]
     Hero --- Title["Title: Connect Everything with One Link"]
     Hero --- Sub["Sub: SNS/Portfolio Integration"]
     Hero --- Button["[G Google Start]"]
     Hero --- Preview["Mockup Preview Image"]
-    Footer[Footer: Terms / Privacy]
+    Footer["Footer: Terms / Privacy"]
     end
 ```
 
-이 문서는 구축될 주요 화면들의 레이아웃 및 UI 컴포넌트 구성을 정의합니다. 모든 디자인 요소는 `Tailwind CSS` 및 `shadcn/ui` 베이스를 고려하여 설계합니다.
+### ASCII Wireframe
+```text
++-------------------------------------------------------------+
+| [LOGO] MyLink                        [로그인] / [마이페이지] |
++-------------------------------------------------------------+
+|                                                             |
+|           하나의 링크로 당신의 모든 것을 연결하세요             |
+|        SNS, 포트폴리오를 1분 만에 통합 프로필로 제작           |
+|                                                             |
+|                   [ G Google로 시작하기 ]                    |
+|                                                             |
+|           +-----------------------+                         |
+|           |       Mockup UI       |                         |
+|           |       (Preview)       |                         |
+|           +-----------------------+                         |
+|                                                             |
++-------------------------------------------------------------+
+```
 
 ---
 
-## 1. 랜딩 페이지 (`/`)
-비로그인 일반 유저 대상의 홍보 및 로그인 진입점 역할을 합니다.
+## 3. 신규 가입 온보딩 화면 (`/onboarding`)
 
-*   **상단 네비게이션바 (Header)**
-    *   좌측: MyLink 로고
-    *   우측: `[로그인]` / `[무료로 시작하기]` 버튼
-*   **히어로 섹션 (Hero Section)**
-    *   메인 타이틀 (H1): "하나의 링크로 당신의 모든 것을 연결하세요."
-    *   서브 텍스트: "SNS, 포트폴리오, 쇼핑몰 - 복잡한 링크 관리를 1분 만에 해결하는 나만의 통합 프로필"
-    *   Primary Button: `[Google로 시작하기]` (클릭 시 Firebase Popup 유도)
-    *   중앙 또는 우측: 모바일 기기 안에서 구동되는 프로필 예시 목업(Mockup) 이미지 혹은 일러스트 레이션.
-
----
-
-## 2. 신규 가입 온보딩 화면 (`/onboarding`)
 첫 로그인 직후 필수로 거쳐야 하는 화면입니다.
 
-*   **중앙 폼 영역 (가운데 정렬된 Card 스타일)**
-    *   아이콘 또는 로고
-    *   안내 텍스트: "마침내 오셨군요! 당신을 나타낼 프로필 정보를 입력해주세요."
-    *   입력 폼 그룹 1 (DisplayName):
-        *   `mylink.com/` + [ 영문/숫자 DisplayName 입력 ] (미리보기 용)
-    *   입력 폼 그룹 2 (사용자 실명):
-        *   [ 사용자 실명 입력 텍스트 필드 ]
-    *   안내 문구: "입력하신 이름들은 가입 후 자유롭게 변경 가능합니다."
-    *   Submit Button: `[대시보드로 이동]` (조건 만족 시에만 활성화)
+### Mermaid Layout
+```mermaid
+graph TD
+    subgraph OnboardingCard ["Onboarding Card"]
+    Title["Welcome!"]
+    Desc["Enter profile info"]
+    IN1["Input: DisplayName (mylink.com/...)"]
+    IN2["Input: Real Name"]
+    Notice["Changeable anytime"]
+    Submit["[Move to Dashboard]"]
+    Title --> Desc --> IN1 --> IN2 --> Notice --> Submit
+    end
+```
+
+### ASCII Wireframe
+```text
++-------------------------------------------------------------+
+|                                                             |
+|                     +-----------------+                     |
+|                     |     Welcome!    |                     |
+|                     +-----------------+                     |
+|             당신을 나타낼 프로필 정보를 입력해주세요              |
+|                                                             |
+|          DisplayName (URL 주소)                               |
+|          +---------------------------------------+          |
+|          | mylink.com/ [ username              ] |          |
+|          +---------------------------------------+          |
+|                                                             |
+|          사용자 실명                                         |
+|          +---------------------------------------+          |
+|          | [ 실제 이름을 입력하세요               ] |          |
+|          +---------------------------------------+          |
+|                                                             |
+|          [!] 언제든지 자유롭게 변경 가능합니다.                   |
+|                                                             |
+|                   [ 대시보드로 이동 ]                        |
+|                                                             |
++-------------------------------------------------------------+
+```
 
 ---
 
-## 3. 대시보드 - 어드민 레이아웃 (`/admin/*`)
-모든 관리자 기능에서 공통으로 사용되는 2-Column (좌측 관리, 우측 라이브 프리뷰) 레이아웃입니다. (모바일 해상도에서는 প্রি뷰가 팝업되거나 하단에 쌓임)
+## 4. 어드민 대시보드 (Admin Dashboard)
 
-*   **좌측 (또는 상단) LNB (Local Navigation Bar)**
-    *   메뉴 탭: `[링크(Links)]`, `[프로필(Profile)]`, `[디자인/테마(추후 추가)]`
-*   **중앙 메인 패널 (관리 영역 - 스크롤 가능)**
-    *   선택된 탭에 따른 상세 설정 UI가 렌더링됨.
-*   **우측 고정 패널 (실시간 라이브 프리뷰 - Live Preview)**
-    *   디스플레이: 스마트폰 기기 모양의 프레임 목업
-    *   기능: 중앙 패널에서 값이 변경될 때 마다 스마트폰 프레임 안의 UI가 퍼블릭 페이지와 100% 동일한 모습으로 실시간 리렌더링.
+### Layout Structure
+*   **2-Column Layout**: Left(Management), Right(Live Mobile Preview)
+
+### Mermaid Layout
+```mermaid
+graph LR
+    subgraph DashboardLayout ["Dashboard (Admin) Layout"]
+    direction TB
+    Header["Header: Logo | MyPage Button"]
+    
+    subgraph MainContent ["Main Content (Split)"]
+        Management["Management Panel (Left)"]
+        Preview["Live Mobile Preview (Right)"]
+    end
+    
+    subgraph ManagementDetails ["Management Details"]
+        Tabs["Tabs: Links | Profile"]
+        Content["Selected Tab Content (Cards/Form)"]
+    end
+    
+    Header --> Management
+    Management --> Tabs --> Content
+    end
+```
+
+### ASCII Wireframe
+```text
++---------------------------------------+---------------------+
+| [LOGO] MyLink            [마이페이지] |    Live Preview     |
++---------------------------------------+---------------------+
+| [링크] [프로필(마이페이지)]              |   +-------------+   |
++---------------------------------------+   |  (Mobile)   |   |
+|                                       |   |   @User     |   |
+| <프로필 탭 뷰>                          |   |             |   |
+|  +---------------------------------+  |   | +---------+ |   |
+|  | (Avatar) [사진 변경]             |  |   | | Link 1  | |   |
+|  |                                 |  |   | +---------+ |   |
+|  | ✎ DisplayName [ Input ]         |  |   | +---------+ |   |
+|  | ✎ 사용자 실명   [ Input ]         |  |   | | Link 2  | |   |
+|  | ✎ 소개글       [ Textarea ]      |  |   | +---------+ |   |
+|  |                                 |  |   |             |   |
+|  |               [프로필 저장]       |  |   +-------------+   |
+|  +---------------------------------+  |                     |
++---------------------------------------+---------------------+
+```
 
 ---
 
-## 4. 대시보드 상세 (1) - 링크 탭 (`/admin/links`)
-중앙 메인 패널에 렌더링되는 실제 링크 추가/조작 컴포넌트입니다.
+## 5. 퍼블릭 프로필 페이지 (Public Profile)
 
-*   **헤더**: "내 링크 관리" 타이틀 아래에 Primary Button 형태의 `[+ 새 링크 추가]` 가 고정 메뉴로 존재.
-*   **링크 카드 리스트 (Drag & Drop 리스트)**: 리스트 뷰 형태로 아래로 쌓임. 단일 카드의 구조는 다음과 같음.
-    *   **카드 좌측**: 점 6개 형태의 드래그 핸들 (≡ 아이콘)
-    *   **카드 상단 우측**: 해당 링크의 On/Off 를 조작하는 토글 스위치 (Switch)
-    *   **카드 바디**:
-        *   제목 입력 텍스트 필드 (Placeholder: "ex) 내 포트폴리오 보기")
-        *   URL 입력 텍스트 필드 (Placeholder: "https://...")
-    *   **카드 하단**: 휴지통 모양 아이콘 버튼(삭제 처리)
+### 컴포넌트 구성 (Mobile First)
+
+```mermaid
+graph TD
+    subgraph MobileView ["Mobile View Frame"]
+    A["프로필 이미지 Circle"]
+    B["DisplayName (실명)"]
+    C["소개글 Bio"]
+    D["링크 버튼 1"]
+    E["링크 버튼 2"]
+    F["Powered by MyLink"]
+    end
+```
+
+### ASCII Wireframe
+```text
+          [     Mobile Page     ]
+
+                 +-------+
+                 |  Img  |
+                 +-------+
+             DisplayName (실명)
+               "소개글 영역"
+
+          +-----------------------+
+          |       Link Title      |
+          +-----------------------+
+
+          +-----------------------+
+          |       Link Title      |
+          +-----------------------+
+
+          +-----------------------+
+          |       Link Title      |
+          +-----------------------+
+
+              Powered by MyLink
+```
 
 ---
 
-## 5. 대시보드 상세 (2) - 프로필 탭 (`/admin/profile`)
-프로필 정보를 입력하는 UI입니다.
+## 6. 사용된 UI 컴포넌트 명세 (shadcn/ui)
 
-*   **프로필 이미지 섹션**
-    *   현재 이미지를 보여주는 큰 아바타 서클
-    *   아바타 우측 혹은 하단에 파일 선택 버튼(Input file)
-*   **정보 입력 폼 섹션**
-    *   라벨: 'DisplayName (고유 URL 등)' -> Input 필드 (영문/숫자)
-    *   라벨: '사용자 실명 (Real Name)' -> Input 필드
-    *   라벨: '자기 소개 (Bio)' -> Textarea 필드 (제한 100자 이내)
-*   **저장 버튼**
-    *   하단에 `[프로필 저장하기]` 버튼 고정.
-
----
-
-## 6. 퍼블릭 프로필 페이지 (`/[username]`)
-외부 방문자들이 접근하게 되는 단독 페이지 포맷입니다. 모바일 폭(Width)에 최우선 초점을 맞춥니다.
-
-*   **전체 배경**: 단색 혹은 추후 커스텀 될 배경색 (MVP에서는 깔끔한 Off-white / Gray-50 등)
-*   **컨텐츠 래퍼 (가운데 정렬, 최대 너비 600px 내외)**
-    *   **헤더 섹션 (상단)**:
-        *   가운데 정렬된 프로필 사진 (Avatar)
-        *   표시 영역: **[ DisplayName (사용자 실명) ]** 형태의 조합된 이름 렌더링
-        *   그 아래 작은 폰트의 한 줄 소개글
-    *   **링크 버튼 섹션 (중앙)**:
-        *   사용자가 On 상태로 둔 링크 카드들이 위아래 패딩(gap)을 가지며 차례대로 세로 나열됨.
-        *   각 버튼은 shadcn 버튼 스타일을 확장(w-full 적용)하여 풀사이즈 블록 형태로 렌더링.
-    *   **브랜딩 푸터 (하단)**:
-        *   작은 글씨로 "Powered by MyLink" 텍스트. 클릭 시 마이링크 랜딩페이지로 랜딩.
+*   **Button**: Primary(랜딩/저장), Ghost(삭제/로그아웃)
+*   **Avatar**: 프로필 이미지 렌더링
+*   **Input / Textarea**: 이름, URL, Bio 입력
+*   **Switch**: 링크 활성화/비활성화 토글
+*   **Card**: 대시보드 내 개별 링크 조작 블록
+*   **Toast**: 저장 완료/링크 복사 완료 알림
+*   **Dialog**: 링크 삭제 시 최종 확인 팝업
