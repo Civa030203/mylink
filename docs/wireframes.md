@@ -1,5 +1,19 @@
 # 마이링크 (MyLink) - 화면별 와이어프레임 설계 (Wireframes)
 
+### Mermaid Layout
+```mermaid
+graph TD
+    subgraph "Landing Page Layout"
+    H[Header: Logo | Login / MyPage]
+    Hero[Hero Section]
+    Hero --- Title["Title: Connect Everything with One Link"]
+    Hero --- Sub["Sub: SNS/Portfolio Integration"]
+    Hero --- Button["[G Google Start]"]
+    Hero --- Preview["Mockup Preview Image"]
+    Footer[Footer: Terms / Privacy]
+    end
+```
+
 이 문서는 구축될 주요 화면들의 레이아웃 및 UI 컴포넌트 구성을 정의합니다. 모든 디자인 요소는 `Tailwind CSS` 및 `shadcn/ui` 베이스를 고려하여 설계합니다.
 
 ---
